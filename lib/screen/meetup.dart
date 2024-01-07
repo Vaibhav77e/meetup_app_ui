@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:ui_test/screen/description.dart';
 
 class Meetup extends StatelessWidget {
    Meetup({super.key});
@@ -74,10 +75,14 @@ ImageProvider<Object> _getAvatarImage(int index) {
               height: 220,
               child: PageView(children: rowImages(),controller: controller,)),
             SizedBox(height: 10,
-            child: SmoothPageIndicator(count: 3,
-            controller: controller,
-             effect: WormEffect(),),
-            
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SmoothPageIndicator(count: 3,
+                controller: controller,
+                 effect: WormEffect(),),
+              ],
+            ),
             ),
             const SizedBox(height: 50,),
             const Text('Trending Popular People',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
@@ -88,6 +93,15 @@ ImageProvider<Object> _getAvatarImage(int index) {
             children: scrollableCards(),
           ),
         ),
+        const SizedBox(height: 50,),
+            const Text('Trending Popular Meetups',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+            const SizedBox(height: 20,),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+         child: Row(
+          children: screenThreeCard(context),
+         ), 
+        )
           ]),
         ),
       ),
@@ -180,6 +194,42 @@ ImageProvider<Object> _getAvatarImage(int index) {
                ],
              )
             ],
+          ),
+        ),
+      );
+    }).toList();
+  }
+
+
+  List<Widget> screenThreeCard(BuildContext context) {
+    List<String> imagePaths = [
+      'assests/screen3image.jpg',
+      'assests/screen3image.jpg',
+      'assests/screen3image.jpg',
+    ];
+
+    return imagePaths.map((String imagePath) {
+      return Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Container(
+          width: 200,
+          height: 200,
+          
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(20)
+          ),
+          child: GestureDetector(
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Description()));
+            },
+            child: ClipRRect(
+               borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                imagePath,
+                fit: BoxFit.cover, 
+              ),
+            ),
           ),
         ),
       );
