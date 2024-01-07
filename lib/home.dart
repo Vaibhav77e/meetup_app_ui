@@ -157,6 +157,35 @@ class _HomeState extends State<Home> {
                   ],
                 )
               ],
+            ),
+            const SizedBox(height : 30,),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Business User?',style: TextStyle(color: Colors.grey),),
+                Text('Don\'t have an account',style: TextStyle(color: Colors.grey),)
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(onPressed: (){}, child: const Text('Login Here',style: TextStyle(color: Colors.blue),)),
+                TextButton(onPressed: (){}, child: const Text('Sign Up',style: TextStyle(color: Colors.blue))),
+              ],
+            ),
+            const SizedBox(height : 20,),
+            const Column(
+        
+              children: [
+                Text('By continuing, you agree to',style: TextStyle(color: Colors.grey),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Promilo\'s',style: TextStyle(color: Colors.grey)),
+                    Text('Terms of Use & Privacy Policy',style: TextStyle(fontWeight: FontWeight.w500)),
+                  ],
+                )
+              ],
             )
           ],),
         ),
