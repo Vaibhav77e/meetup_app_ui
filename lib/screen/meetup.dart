@@ -1,7 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Meetup extends StatelessWidget {
-  const Meetup({super.key});
+   Meetup({super.key});
+  final controller = PageController();
+
+  List<String> randomImages = [
+    'assests/image1.jpg',
+    'assests/image2.jpg',
+    'assests/image3.jpg',
+    'assests/image4.jpg',
+    'assests/image5.jpg',
+  ];
+
+ImageProvider<Object> _getAvatarImage(int index) {
+  switch (index) {
+    case 1:
+      return AssetImage('assests/image1.jpg');
+    case 2:
+      return AssetImage('assests/image2.jpg');
+    case 3:
+      return AssetImage('assests/image3.jpg');
+    case 4:
+      return AssetImage('assests/image4.jpg');
+    case 5:
+      return AssetImage('assests/image5.jpg');
+    default:
+      return AssetImage('assests/image1.jpg');
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +44,9 @@ class Meetup extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 18),
-          child: Column(children: [
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             Container(
               height: 60,
               decoration: BoxDecoration(
@@ -37,24 +67,40 @@ class Meetup extends StatelessWidget {
                   const Text('Search',style: TextStyle(color: Colors.grey),),
                     ],
                   ),
+                  
                   Padding(
                     padding: const EdgeInsets.only(right:8.0),
                     child: SizedBox(
                       height: 30,
                       child: Image.asset('assests/microphone.png')),
                   ),
-                    
                 ],
-                
               ),
-              
             ),
+            SizedBox(
+              height: 220,
+              child: PageView(children: rowImages(),controller: controller,)),
+            // SingleChildScrollView(
+            //   scrollDirection: Axis.horizontal,
+            //   child: Row(
+            //     children: rowImages(),
+            //   ),
+            // ),
+            SizedBox(height: 10,
+            child: SmoothPageIndicator(count: 3,
+            controller: controller,
+             effect: WormEffect(),),
+            
+            ),
+            const SizedBox(height: 50,),
+            const Text('Trending Popular People',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+            const SizedBox(height: 20,),
             SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: rowImages(),
-              ),
-            )
+           scrollDirection: Axis.horizontal,
+           child: Row(
+            children: scrollableCards(),
+          ),
+        ),
           ]),
         ),
       ),
@@ -71,16 +117,71 @@ class Meetup extends StatelessWidget {
     ];
 
     return imagePaths.map((String imagePath) {
+      return Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Container(
+          width: 500,
+          height: 200,
+          
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(20)
+          ),
+          child: ClipRRect(
+             borderRadius: BorderRadius.circular(20),
+            child: Image.asset(
+              imagePath,
+              fit: BoxFit.cover, 
+            ),
+          ),
+        ),
+      );
+    }).toList();
+  }
+
+
+    List<Widget> scrollableCards() {
+    List<String> titles = ['Author','Publishers', 'Distributors', 'Contributors', 'Donators'];
+
+    return titles.map((String title) {
       return Container(
-        width: 500,
-        height: 200,
+        width: 320,
+        height: 190,
         margin: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
+          //color: Colors.blue,
           border: Border.all(color: Colors.black),
+          borderRadius: BorderRadius.circular(12.0),
         ),
-        child: Image.asset(
-          imagePath,
-          fit: BoxFit.cover, // Change this to the desired BoxFit
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle( fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
+              Text('1,208 Meetups',style: TextStyle(color: Colors.grey),),
+              Divider(thickness: 0.5,),
+              Expanded(
+                child: Stack(
+                  children: List.generate(
+                    5,
+                    (index) => Positioned(
+                      left: index * 45.0,
+                      child: ClipRRect(
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundImage: _getAvatarImage(index+1)
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ),
+            ],
+          ),
         ),
       );
     }).toList();

@@ -38,6 +38,7 @@ dependencies:
   fluttertoast: ^8.2.4
   http:
   crypto:
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:
