@@ -125,6 +125,38 @@ class _HomeState extends State<Home> {
                   child: Text('Submit',style:TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w700),),
                 )
               ),
+            ),
+            const SizedBox(height: 50,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                  width: MediaQuery.sizeOf(context).width/2.5,
+                  child:const Divider(color: Colors.grey,thickness: 0.2),),
+                const Text('or'),
+                SizedBox(
+                  width: MediaQuery.sizeOf(context).width/2.5,
+                  child:const Divider(color: Colors.grey,thickness: 0.2),),
+              ],
+            ),
+            const SizedBox(height: 50,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              Row(
+                  children: [
+                buildCommonImagePlaceHolder('assests/google.png'),
+               const SizedBox(width: 10,),
+                buildCommonImagePlaceHolder('assests/linkedin.png'),
+                const SizedBox(width: 10,),
+                buildCommonImagePlaceHolder('assests/facebook.png'),
+                const SizedBox(width: 10,),
+                buildCommonImagePlaceHolder('assests/instagram.png'),
+                const SizedBox(width: 10,),
+                buildCommonImagePlaceHolder('assests/whatsapp.png'),
+                  ],
+                )
+              ],
             )
           ],),
         ),
@@ -192,6 +224,15 @@ String hashPassword(String password) {
   var bytes = utf8.encode(password);
   var digest = sha256.convert(bytes);
   return digest.toString();
+}
+
+
+Widget buildCommonImagePlaceHolder(String imagePath){
+  return Container(
+    height: 40,
+    width: 40,
+   child: Image.asset(imagePath),
+  );
 }
 
 
