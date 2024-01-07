@@ -5,13 +5,6 @@ class Meetup extends StatelessWidget {
    Meetup({super.key});
   final controller = PageController();
 
-  List<String> randomImages = [
-    'assests/image1.jpg',
-    'assests/image2.jpg',
-    'assests/image3.jpg',
-    'assests/image4.jpg',
-    'assests/image5.jpg',
-  ];
 
 ImageProvider<Object> _getAvatarImage(int index) {
   switch (index) {
@@ -80,12 +73,6 @@ ImageProvider<Object> _getAvatarImage(int index) {
             SizedBox(
               height: 220,
               child: PageView(children: rowImages(),controller: controller,)),
-            // SingleChildScrollView(
-            //   scrollDirection: Axis.horizontal,
-            //   child: Row(
-            //     children: rowImages(),
-            //   ),
-            // ),
             SizedBox(height: 10,
             child: SmoothPageIndicator(count: 3,
             controller: controller,
@@ -146,7 +133,7 @@ ImageProvider<Object> _getAvatarImage(int index) {
     return titles.map((String title) {
       return Container(
         width: 320,
-        height: 190,
+        height: 230,
         margin: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           //color: Colors.blue,
@@ -180,6 +167,18 @@ ImageProvider<Object> _getAvatarImage(int index) {
                   ),
                 )
               ),
+             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+               children: [
+                 Container(
+                  decoration: BoxDecoration(color: Colors.blue,borderRadius: BorderRadius.circular(10)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 15),
+                    child: Text('See more',style: TextStyle(color:Colors.white),),
+                  ),
+                 ),
+               ],
+             )
             ],
           ),
         ),
